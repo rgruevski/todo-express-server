@@ -2,6 +2,14 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import uuid from 'uuid';
+import { MongoClient } from "mongodb";
+
+const connectionString = process.env.ATLAS_URI;
+
+const client = new MongoClient(connectionString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 const app = express();
 
