@@ -13,8 +13,7 @@ app.get('/todos', (req, res) => {
     res.status(200).json(fakeTodos);
 });
 
-// The route for getting a list of all todos, but with a delay
-// (to display the loading component better)
+// The route for getting a list of all todos, but with a delay to display the loading component
 app.get('/todos-delay', (req, res) => {
     setTimeout(() => res.status(200).json(fakeTodos), 2000);
 });
