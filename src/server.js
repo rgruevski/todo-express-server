@@ -2,26 +2,17 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import uuid from 'uuid';
-import Database from "./conn";
+import FetchTodos from "./FetchTodos";
 
 const PORT = 8080;
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.json());
 
 // The route for getting a list of all todos
-app.get('/todo-list', (req, res) => {
-    const client = Database.connectToServer();
-    
-
-    res.status(200).json(fakeTodos);
-});
-
-// The route for getting a list of all todos with timeout for loading effect
-app.get('/todos-delay', (req, res) => {
-    setTimeout(() => res.status(200).json(fakeTodos), 2000);
+app.get('/todos', (req, res) => {
+    res.status(200).send(new FetchTodos());
 });
 
 // The route for creating a new todo item

@@ -1,11 +1,14 @@
+import { env } from 'process';
 import { MongoClient } from "mongodb";
-const connectionString = process.env.ATLAS_URI;
+
+const connectionString = "mongodb://localhost:27017";
+
+let connect;
+
 const client = new MongoClient(connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
-
-let connect;
 
 const Database = {
     connectToServer: function (callback) {
@@ -21,5 +24,5 @@ const Database = {
     getDb: function () {
         return connect;
     }
-}
+};
 export default Database;
