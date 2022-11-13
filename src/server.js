@@ -2,61 +2,42 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import uuid from 'uuid';
-import FetchTodos from "./FetchTodos";
+import FetchForms from "./FetchForms";
 
-const PORT = 8080;
+const PORT = 9090;
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
 
-// The route for getting a list of all todos
-app.get('/todos', (req, res) => {
-    res.status(200).send(new FetchTodos());
+// The route for getting a list of all forms
+app.get('/forms', (req, res) => {
+    res.status(200).send(new FetchForms());
 });
 
-// The route for creating a new todo item
-app.post('/todos', (req, res) => {
+// The route for creating a new form item
+app.post('/forms', (req, res) => {
     const { text } = req.body;
     if (text) {
-        const insertedTodo = {
+        const insertedForm = {
             id: uuid(),
             createdAt: Date.now(),
             isCompleted: false,
             text,
         }
-        fakeTodos.push(insertedTodo);
-        res.status(200).json(insertedTodo);
+        fakeForms.push(insertedForm);
+        res.status(200).json(insertedForm);
     } else {
         res.status(400).json({ message: 'Request body should have a text property' });
     }
 });
 
-// To mark a todo as complete
-app.post('/todos/:id/completed', (req, res) => {
+// To delete a form list item
+app.delete('/forms/:id', (req, res) => {
     const { id } = req.params;
-    const matchingTodo = fakeTodos.find(todo => todo.id === id);
-    const updatedTodo = {
-        ...matchingTodo,
-        isCompleted: true,
-    }
-    if (updatedTodo) {
-        fakeTodos = fakeTodos.map(todo =>
-            todo.id === id
-                ? updatedTodo
-                : todo);
-        res.status(200).json(updatedTodo);
-    } else {
-        res.status(400).json({ message: 'There is no todo with that id' });
-    }
-})
-
-// To delete a todo list item
-app.delete('/todos/:id', (req, res) => {
-    const { id } = req.params;
-    const removedTodo = fakeTodos.find(todo => todo.id === id);
-    fakeTodos = fakeTodos.filter(todo => todo.id !== id);
-    res.status(200).json(removedTodo);
+    const removedForm = fakeForms.find(form => form.id === id);
+    fakeForms = fakeForms.filter(form => form.id !== id);
+    res.status(200).json(removedForm);
 });
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));

@@ -1,7 +1,7 @@
 {
-  "name": "todo-express-server",
+  "name": "form-express-server",
   "version": "1.0.0",
-  "description": "A babel node http server to accompany todo-list ReactJS application.",
+  "description": "A babel node http server to accompany form-list React Redux Application.",
   "main": "server.js",
   "scripts": {
     "start": "npx babel-node ./src/server.js"

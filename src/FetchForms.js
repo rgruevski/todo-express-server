@@ -1,15 +1,15 @@
 import { Router } from "express";
 import Database from "./Database";
 export default () => {
-    Router("/todos").get(async function (req, res) {
-        const get = Database.getDb("todo");
+    Router("/forms").get(async function (req, res) {
+        const get = Database.getDb("form");
         get
-            .collection("todos")
+            .collection("forms")
             .find({})
             .limit(50)
             .toArray(function (err, result) {
                 if (err) {
-                    res.status(400).send("Error fetching todos...");
+                    res.status(400).send("Error fetching forms...");
                 } else {
                     console.log(result);
                     res.json(result);
