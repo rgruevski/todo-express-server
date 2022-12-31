@@ -1,7 +1,7 @@
-import { env } from 'process';
 import { MongoClient } from "mongodb";
 
-const connectionString = "mongodb://localhost:27017";
+const ATLAS_URI = "mongodb://localhost:27017";
+const connectionString = ATLAS_URI;
 
 let connect;
 
@@ -16,8 +16,8 @@ const Database = {
             if (err || !db) {
                 return callback(err);
             }
-            connect = db.db("form");
-            console.log(`Connected to ${connect.databaseName}`)
+            connect = db.db("vPost");
+            console.log(`Connected to ${connect.databaseName} at ${ATLAS_URI}`)
             return callback();
         })
     },
